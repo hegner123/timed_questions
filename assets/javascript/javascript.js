@@ -1,7 +1,7 @@
 
 window.onload = function() {
   questionScreenToggle();
-  $(".question-screen-one").hide();
+  $(".questions").hide();
   $("#lap").on("click", timer.recordLap);
   $("#stop").on("click", timer.stop);
   $("#reset").on("click", timer.reset);
@@ -40,15 +40,14 @@ var clockRunning = false;
 var timer = {
 
   time: 0,
-  lap: 1,
-  countdown: 30,
+  countdown: 8,
 
 
   reset: function() {
-    timer.countdown = 30;
+    timer.countdown = 8;
     timer.time = 0;
-    timer.lap = 1;
-    $("#display").text("30");
+    
+    $("#display").text("8");
   },
 
   start: function() {
@@ -83,36 +82,50 @@ function questionOne (){
   timer.start();
   game.state = "Question One"
   console.log(game.state);
-  
-  $("#correct-choice").on("click", function (){
-    game.score++;
+  $(".correct-choice-one").on("click", function (){
+    game.score = game.score +1;
     timer.stop();
     timer.reset();
     $(".question-screen-one").hide();
     $("#score").text(game.score);
-
+    questionTwo();
   })
-
   timeout = setInterval(checkState, 1000)
-
   function checkState(){
-
     if (timer.countdown === 0){
-      game.score--;
+      game.score = game.score - 1;
       timer.stop();
       timer.reset();
       $(".question-screen-one").hide();
       $("#score").text(game.score);
+      questionTwo();
     };
-    
   }
-    
-
-  
-  
 };
 
-function questionTwo (){};
+function questionTwo (){
+  $(".question-screen-two").show();
+  timer.start();
+  game.state = "Question Two"
+  console.log(game.state);
+  $(".correct-choice-two").on("click", function (){
+    game.score = game.score +1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-two").hide();
+    $("#score").text(game.score);
+  })
+  timeout = setInterval(checkState, 1000)
+  function checkState(){
+    if (timer.countdown === 0){
+      game.score = game.score - 1;
+      timer.stop();
+      timer.reset();
+      $(".question-screen-two").hide();
+      $("#score").text(game.score);
+    };
+  }
+};
 
 function questionThree (){};
 
