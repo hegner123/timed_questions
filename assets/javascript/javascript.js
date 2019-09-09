@@ -1,23 +1,25 @@
 
 window.onload = function() {
   questionScreenToggle();
+  $(".question-screen-one").hide();
   $("#lap").on("click", timer.recordLap);
   $("#stop").on("click", timer.stop);
   $("#reset").on("click", timer.reset);
   $("#start").on("click", timer.start);
+  $("#game-start").on("click", questionOne);
   $("#start-screen").on("click", startScreenToggle);
   $("#question-screen").on("click", questionScreenToggle);
 
 
-  var game = {
+  
+
+};
+
+var game = {
   state:"",
   score:0,
   questionSet:"",
   }
-
-};
-
-  
 
 
 function startScreenToggle(){
@@ -64,7 +66,7 @@ var timer = {
   count: function() {
     timer.time++;
     timer.countdown--;
-    $("#display").text(timer.time).text(timer.countdown);
+    $("#display").text(timer.countdown);
 
   },
 
@@ -74,8 +76,53 @@ var timer = {
   
 };
 
+var timeout;
 
+function questionOne (){
+  $(".question-screen-one").show();
+  timer.start();
+  game.state = "Question One"
+  console.log(game.state);
+  
+  $("#correct-choice").on("click", function (){
+    game.score++;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-one").hide();
+    $("#score").text(game.score);
 
+  })
+
+  timeout = setInterval(checkState, 1000)
+
+  function checkState(){
+
+    if (timer.countdown === 0){
+      game.score--;
+      timer.stop();
+      timer.reset();
+      $(".question-screen-one").hide();
+      $("#score").text(game.score);
+    };
+    
+  }
+    
+
+  
+  
+};
+
+function questionTwo (){};
+
+function questionThree (){};
+
+function questionFour (){};
+
+function questionFive (){};
+
+function questionSix (){};
+
+function winState(){};
 
 
 
