@@ -1,14 +1,15 @@
 
 window.onload = function() {
-  questionScreenToggle();
   $(".questions").hide();
+  $(".question-one-win-screen").hide();
   $("#lap").on("click", timer.recordLap);
   $("#stop").on("click", timer.stop);
   $("#reset").on("click", timer.reset);
   $("#start").on("click", timer.start);
   $("#game-start").on("click", questionOne);
   $("#start-screen").on("click", startScreenToggle);
-  $("#question-screen").on("click", questionScreenToggle);
+
+  
 
 
   
@@ -27,9 +28,7 @@ function startScreenToggle(){
   
 }
 
-function questionScreenToggle(){
-  $(".question-screen-display").toggle();
-}
+
 
 var intervalId;
 
@@ -68,10 +67,6 @@ var timer = {
     $("#display").text(timer.countdown);
 
   },
-
-
-
-  
   
 };
 
@@ -83,7 +78,16 @@ function questionOne (){
   game.state = "Question One"
   console.log(game.state);
   $(".correct-choice-one").on("click", function (){
-    game.score = game.score +1;
+    game.score = game.score + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-one").hide();
+    $(".question-one-win-screen").show();
+    $("#score").text(game.score);
+    setTimeout(questionTwo, 5000);
+  })
+  $(".incorrect-choice-one").on("click", function (){
+    game.score = game.score - 1;
     timer.stop();
     timer.reset();
     $(".question-screen-one").hide();
@@ -104,6 +108,8 @@ function questionOne (){
 };
 
 function questionTwo (){
+  $(".question-one-win-screen").hide();
+  clearTimeout();
   $(".question-screen-two").show();
   timer.start();
   game.state = "Question Two"
@@ -114,6 +120,14 @@ function questionTwo (){
     timer.reset();
     $(".question-screen-two").hide();
     $("#score").text(game.score);
+  })
+  $(".incorrect-choice-two").on("click", function (){
+    game.score = game.score - 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-one").hide();
+    $("#score").text(game.score);
+    
   })
   timeout = setInterval(checkState, 1000)
   function checkState(){
