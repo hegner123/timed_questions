@@ -132,6 +132,7 @@ function questionTwo (){
     timer.stop();
     timer.reset();
     $(".question-screen-two").hide();
+    $(".question-two-lose-screen").show();
     $("#score").text(game.score);
     setTimeout(questionThree, 5000);
   })
@@ -142,6 +143,7 @@ function questionTwo (){
       timer.stop();
       timer.reset();
       $(".question-screen-two").hide();
+      $(".question-two-lose-screen").show();
       $("#score").text(game.score);
       setTimeout(questionThree, 5000);
     };
@@ -171,6 +173,7 @@ function questionThree (){
     timer.stop();
     timer.reset();
     $(".question-screen-three").hide();
+    $(".question-three-lose-screen").show();
     $("#score").text(game.score);
     setTimeout(questionFour, 5000);
 
@@ -182,6 +185,7 @@ function questionThree (){
       timer.stop();
       timer.reset();
       $(".question-screen-three").hide();
+      $(".question-three-lose-screen").show();
       $("#score").text(game.score);
       setTimeout(questionFour, 5000);
 
@@ -211,6 +215,7 @@ function questionFour (){
     timer.stop();
     timer.reset();
     $(".question-screen-four").hide();
+    $(".question-four-lose-screen").show();
     $("#score").text(game.score);
     setTimeout(questionFive, 5000);
 
@@ -222,6 +227,7 @@ function questionFour (){
       timer.stop();
       timer.reset();
       $(".question-screen-four").hide();
+      $(".question-four-lose-screen").show();
       $("#score").text(game.score);
       setTimeout(questionFive, 5000);
 
@@ -252,6 +258,7 @@ function questionFive (){
     timer.stop();
     timer.reset();
     $(".question-screen-five").hide();
+    $(".question-five-lose-screen").show();
     $("#score").text(game.score);
     setTimeout(resultState, 5000);
 
@@ -263,6 +270,7 @@ function questionFive (){
       timer.stop();
       timer.reset();
       $(".question-screen-five").hide();
+      $(".question-five-lose-screen").show();
       $("#score").text(game.score);
       setTimeout(resultState, 5000);
 
