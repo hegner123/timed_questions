@@ -91,6 +91,7 @@ function questionOne (){
     timer.stop();
     timer.reset();
     $(".question-screen-one").hide();
+    $(".question-one-lose-screen").show();
     $("#score").text(game.score);
     setTimeout(questionTwo, 5000);
   })
@@ -101,6 +102,7 @@ function questionOne (){
       timer.stop();
       timer.reset();
       $(".question-screen-one").hide();
+      $(".question-one-lose-screen").show();
       $("#score").text(game.score);
       setTimeout(questionTwo, 5000);
     };
@@ -109,6 +111,7 @@ function questionOne (){
 
 function questionTwo (){
   $(".question-one-win-screen").hide();
+  $(".question-one-lose-screen").hide();
   clearTimeout();
   $(".question-screen-two").show();
   timer.start();
@@ -147,6 +150,7 @@ function questionTwo (){
 
 function questionThree (){
   $(".question-two-win-screen").hide();
+  $(".question-two-lose-screen").hide();
   clearTimeout();
   $(".question-screen-three").show();
   timer.start();
@@ -187,6 +191,7 @@ function questionThree (){
 
 function questionFour (){
   $(".question-three-win-screen").hide();
+  $(".question-three-lose-screen").hide();
   clearTimeout();
   $(".question-screen-four").show();
   timer.start();
@@ -200,7 +205,6 @@ function questionFour (){
     $("#score").text(game.score);
     $(".question-four-win-screen").show();
     setTimeout(questionFive, 5000);
-    
   })
   $(".incorrect-choice-four").on("click", function (){
    game.incorrectAnswers = game.incorrectAnswers + 1;
@@ -227,6 +231,7 @@ function questionFour (){
 
 function questionFive (){
   $(".question-four-win-screen").hide();
+  $(".question-four-lose-screen").hide();
   clearTimeout();
   $(".question-screen-five").show();
   timer.start();
@@ -271,6 +276,7 @@ function winState(){};
 
 function resultState(){
   console.log("Result State");
+  $(".question-five-lose-screen").hide();
   $(".question-five-win-screen").hide();
   $(".results-screen").show();
   $("#correct-answers").text("Correct Answers: " + game.correctAnswers);
