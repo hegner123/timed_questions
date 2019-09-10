@@ -1,7 +1,7 @@
 
 window.onload = function() {
   $(".questions").hide();
-  $(".question-one-win-screen").hide();
+  
   $("#lap").on("click", timer.recordLap);
   $("#stop").on("click", timer.stop);
   $("#reset").on("click", timer.reset);
@@ -18,14 +18,14 @@ window.onload = function() {
 
 var game = {
   state:"",
-  score:0,
+  correctAnswers: 0,
+  incorrectAnswers: 0,
   questionSet:"",
   }
 
 
 function startScreenToggle(){
   $(".start-screen-display").toggle();
-  
 }
 
 
@@ -45,8 +45,7 @@ var timer = {
   reset: function() {
     timer.countdown = 8;
     timer.time = 0;
-    
-    $("#display").text("8");
+    $(".display").text("8");
   },
 
   start: function() {
@@ -64,7 +63,7 @@ var timer = {
   count: function() {
     timer.time++;
     timer.countdown--;
-    $("#display").text(timer.countdown);
+    $(".display").text(timer.countdown);
 
   },
   
@@ -73,12 +72,13 @@ var timer = {
 var timeout;
 
 function questionOne (){
+  $(".game-controls").hide();
   $(".question-screen-one").show();
   timer.start();
   game.state = "Question One"
   console.log(game.state);
   $(".correct-choice-one").on("click", function (){
-    game.score = game.score + 1;
+    game.correctAnswers = game.correctAnswers + 1;
     timer.stop();
     timer.reset();
     $(".question-screen-one").hide();
@@ -87,22 +87,22 @@ function questionOne (){
     setTimeout(questionTwo, 5000);
   })
   $(".incorrect-choice-one").on("click", function (){
-    game.score = game.score - 1;
+   game.incorrectAnswers = game.incorrectAnswers + 1;
     timer.stop();
     timer.reset();
     $(".question-screen-one").hide();
     $("#score").text(game.score);
-    questionTwo();
+    setTimeout(questionTwo, 5000);
   })
   timeout = setInterval(checkState, 1000)
   function checkState(){
     if (timer.countdown === 0){
-      game.score = game.score - 1;
+     game.incorrectAnswers = game.incorrectAnswers + 1;
       timer.stop();
       timer.reset();
       $(".question-screen-one").hide();
       $("#score").text(game.score);
-      questionTwo();
+      setTimeout(questionTwo, 5000);
     };
   }
 };
@@ -115,41 +115,167 @@ function questionTwo (){
   game.state = "Question Two"
   console.log(game.state);
   $(".correct-choice-two").on("click", function (){
-    game.score = game.score +1;
+    game.correctAnswers = game.correctAnswers + 1;
     timer.stop();
     timer.reset();
     $(".question-screen-two").hide();
     $("#score").text(game.score);
+    $(".question-two-win-screen").show();
+    setTimeout(questionThree, 5000);
+    
   })
   $(".incorrect-choice-two").on("click", function (){
-    game.score = game.score - 1;
+   game.incorrectAnswers = game.incorrectAnswers + 1;
     timer.stop();
     timer.reset();
-    $(".question-screen-one").hide();
+    $(".question-screen-two").hide();
     $("#score").text(game.score);
-    
+    setTimeout(questionThree, 5000);
   })
   timeout = setInterval(checkState, 1000)
   function checkState(){
     if (timer.countdown === 0){
-      game.score = game.score - 1;
+     game.incorrectAnswers = game.incorrectAnswers + 1;
       timer.stop();
       timer.reset();
       $(".question-screen-two").hide();
       $("#score").text(game.score);
+      setTimeout(questionThree, 5000);
     };
   }
 };
 
-function questionThree (){};
+function questionThree (){
+  $(".question-two-win-screen").hide();
+  clearTimeout();
+  $(".question-screen-three").show();
+  timer.start();
+  game.state = "Question Three"
+  console.log(game.state);
+  $(".correct-choice-three").on("click", function (){
+    game.correctAnswers = game.correctAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-three").hide();
+    $("#score").text(game.score);
+    $(".question-three-win-screen").show();
+    setTimeout(questionFour, 5000);
+   
+  })
+  $(".incorrect-choice-three").on("click", function (){
+   game.incorrectAnswers = game.incorrectAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-three").hide();
+    $("#score").text(game.score);
+    setTimeout(questionFour, 5000);
 
-function questionFour (){};
+  })
+  timeout = setInterval(checkState, 1000)
+  function checkState(){
+    if (timer.countdown === 0){
+     game.incorrectAnswers = game.incorrectAnswers + 1;
+      timer.stop();
+      timer.reset();
+      $(".question-screen-three").hide();
+      $("#score").text(game.score);
+      setTimeout(questionFour, 5000);
 
-function questionFive (){};
+    };
+  }
+};
 
-function questionSix (){};
+function questionFour (){
+  $(".question-three-win-screen").hide();
+  clearTimeout();
+  $(".question-screen-four").show();
+  timer.start();
+  game.state = "Question Four"
+  console.log(game.state);
+  $(".correct-choice-four").on("click", function (){
+    game.correctAnswers = game.correctAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-four").hide();
+    $("#score").text(game.score);
+    $(".question-four-win-screen").show();
+    setTimeout(questionFive, 5000);
+    
+  })
+  $(".incorrect-choice-four").on("click", function (){
+   game.incorrectAnswers = game.incorrectAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-four").hide();
+    $("#score").text(game.score);
+    setTimeout(questionFive, 5000);
+
+  })
+  timeout = setInterval(checkState, 1000)
+  function checkState(){
+    if (timer.countdown === 0){
+     game.incorrectAnswers = game.incorrectAnswers + 1;
+      timer.stop();
+      timer.reset();
+      $(".question-screen-four").hide();
+      $("#score").text(game.score);
+      setTimeout(questionFive, 5000);
+
+    };
+  }
+};
+
+function questionFive (){
+  $(".question-four-win-screen").hide();
+  clearTimeout();
+  $(".question-screen-five").show();
+  timer.start();
+  game.state = "Question Five"
+  console.log(game.state);
+  $(".correct-choice-five").on("click", function (){
+    game.correctAnswers = game.correctAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-five").hide();
+    $("#score").text(game.score);
+    $(".question-five-win-screen").show();
+    setTimeout(resultState, 5000);
+    
+  })
+  $(".incorrect-choice-five").on("click", function (){
+   game.incorrectAnswers = game.incorrectAnswers + 1;
+    timer.stop();
+    timer.reset();
+    $(".question-screen-five").hide();
+    $("#score").text(game.score);
+    setTimeout(resultState, 5000);
+
+  })
+  timeout = setInterval(checkState, 1000)
+  function checkState(){
+    if (timer.countdown === 0){
+     game.incorrectAnswers = game.incorrectAnswers + 1;
+      timer.stop();
+      timer.reset();
+      $(".question-screen-five").hide();
+      $("#score").text(game.score);
+      setTimeout(resultState, 5000);
+
+    };
+  }
+};
+
+
 
 function winState(){};
+
+function resultState(){
+  console.log("Result State");
+  $(".question-five-win-screen").hide();
+  $(".results-screen").show();
+  $("#correct-answers").text("Correct Answers: " + game.correctAnswers);
+  $("#incorrect-answers").text("Incorrect Answers: " + game.incorrectAnswers);
+};
 
 
 
