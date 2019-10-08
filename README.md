@@ -1,16 +1,6 @@
 # timed_questions
 
-to do:
-add incorrect choices html
-add button functions for incorrect choice
-add question content
-pick question theme:
-Guitar Trivia
 
-How many strings does a guitar have?
-a. 4
-b. 5
-c. 8
-d. 6
+# Pull Requests
 
-add styleing
+This project is for my coding bootcamp, and as such I will not be accepting any Pull Requests. Thank you for your understanding.
