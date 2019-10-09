@@ -1,20 +1,13 @@
 
 window.onload = function() {
-  $(".questions").hide();
-  
-  $("#lap").on("click", timer.recordLap);
-  $("#stop").on("click", timer.stop);
-  $("#reset").on("click", timer.reset);
-  $("#start").on("click", timer.start);
+  gameStart();
   $("#game-start").on("click", questionOne);
-  $("#start-screen").on("click", startScreenToggle);
 
-  
+  function gameStart(){
+    $(".questions").hide();
 
-
-  
-
-};
+    $("#game-start").on("click", );
+  };
 
 var game = {
   state:"",
@@ -23,12 +16,13 @@ var game = {
   questionSet:"",
   }
 
-
-function startScreenToggle(){
-  $(".start-screen-display").toggle();
+function startScreenHide(){
+  $(".start-screen-display").hide();
 }
 
-
+function startScreenShow(){
+  $(".start-screen-display").show();
+}
 
 var intervalId;
 
@@ -40,7 +34,6 @@ var timer = {
 
   time: 0,
   countdown: 8,
-
 
   reset: function() {
     timer.countdown = 8;
@@ -59,14 +52,14 @@ var timer = {
     clearInterval(intervalId);
     clockRunning = false;
   },
-  
+
   count: function() {
     timer.time++;
     timer.countdown--;
     $(".display").text(timer.countdown);
 
   },
-  
+
 };
 
 var timeout;
@@ -125,7 +118,7 @@ function questionTwo (){
     $("#score").text(game.score);
     $(".question-two-win-screen").show();
     setTimeout(questionThree, 5000);
-    
+
   })
   $(".incorrect-choice-two").on("click", function (){
    game.incorrectAnswers = game.incorrectAnswers + 1;
@@ -166,7 +159,7 @@ function questionThree (){
     $("#score").text(game.score);
     $(".question-three-win-screen").show();
     setTimeout(questionFour, 5000);
-   
+
   })
   $(".incorrect-choice-three").on("click", function (){
    game.incorrectAnswers = game.incorrectAnswers + 1;
@@ -251,7 +244,7 @@ function questionFive (){
     $("#score").text(game.score);
     $(".question-five-win-screen").show();
     setTimeout(resultState, 5000);
-    
+
   })
   $(".incorrect-choice-five").on("click", function (){
    game.incorrectAnswers = game.incorrectAnswers + 1;
@@ -278,10 +271,6 @@ function questionFive (){
   }
 };
 
-
-
-function winState(){};
-
 function resultState(){
   console.log("Result State");
   $(".question-five-lose-screen").hide();
@@ -289,51 +278,16 @@ function resultState(){
   $(".results-screen").show();
   $("#correct-answers").text("Correct Answers: " + game.correctAnswers);
   $("#incorrect-answers").text("Incorrect Answers: " + game.incorrectAnswers);
+  $("#reset-btn").on('click',function(){
+    game.correctAnswers = 0;
+    game.incorrectAnswers = 0;
+    $(".results-screen").hide();
+    $('.game-controls').show();
+  });
 };
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
